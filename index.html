@@ -9,7 +9,7 @@
   <style>
     :root {
       --bg: linear-gradient(135deg, #f0f2f5 0%, #e8ecef 100%);
-      --glass: rgba(255, 255, 255, 0.92); /* more opaque for clarity */
+      --glass: rgba(255, 255, 255, 0.92);
       --blur: blur(20px);
       --border: 1px solid rgba(200, 200, 200, 0.6);
       --shadow: 0 20px 60px rgba(0,0,0,0.18);
@@ -49,8 +49,24 @@
       border: var(--border);
       border-radius: 28px;
       box-shadow: var(--shadow);
-      padding: 28px 32px 24px;
+      padding: 28px 32px 44px; /* extra bottom padding for copyright */
       position: relative;
+    }
+
+    .copyright {
+      position: absolute;
+      bottom: 12px;
+      right: 20px;
+      font-size: 0.78rem;
+      color: #888;
+      opacity: 0.7;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity 0.3s;
+    }
+
+    .app-card:hover .copyright {
+      opacity: 0.9;
     }
 
     .how-to-link {
@@ -165,12 +181,12 @@
       color: #8e8e93;
     }
 
-    /* MODALS - no overlay opacity */
+    /* MODALS */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: transparent;           /* ← removed opacity */
+      background: transparent;
       z-index: 9999;
       align-items: center;
       justify-content: center;
@@ -180,7 +196,7 @@
     .modal.show { display: flex; }
 
     .modal-card {
-      background: white;                 /* solid white for full clarity */
+      background: white;
       border: 2px solid #000;
       border-radius: 36px;
       box-shadow: 0 30px 90px rgba(0,0,0,0.45);
@@ -190,7 +206,7 @@
       position: relative;
       overflow-y: auto;
       color: #1d1d1f;
-      backdrop-filter: var(--blur);      /* kept blur on card itself */
+      backdrop-filter: var(--blur);
     }
 
     .modal-card h2 {
@@ -205,13 +221,8 @@
       margin-bottom: 16px;
     }
 
-    .modal-card ul {
-      padding-left: 24px;
-    }
-
-    .modal-card li {
-      margin-bottom: 12px;
-    }
+    .modal-card ul { padding-left: 24px; }
+    .modal-card li { margin-bottom: 12px; }
 
     .close-btn {
       position: absolute;
@@ -248,7 +259,7 @@
     /* Desktop */
     @media (min-width: 768px) {
       .app-container { max-width: 1150px; padding: 30px 20px; }
-      .app-card { padding: 32px 60px 24px; border-radius: 40px; }
+      .app-card { padding: 32px 60px 44px; border-radius: 40px; }
       .icon { width: 130px; height: 130px; margin-bottom: 14px; }
       h1 { font-size: 3.0rem; margin-bottom: 4px; }
       .subtitle { font-size: 1.25rem; margin-bottom: 14px; }
@@ -296,6 +307,10 @@
          class="download-btn" download>
         <i class="fas fa-cloud-arrow-down"></i> Download Anti-Matter IPA
       </a>
+      <!-- DigiWall 2025 copyright signature -->
+      <div class="copyright">
+        © 2025 DigiWall
+      </div>
     </div>
   </div>
 
