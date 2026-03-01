@@ -1,25 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Downloads</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Antimatter — Download IPA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Vanilla Tilt.js for 3D tilt hover (lightweight, GPU-friendly) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
-    h1 { text-align: center; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 15px 0; font-size: 1.2em; }
-    a { text-decoration: none; color: #0066cc; }
-    a:hover { text-decoration: underline; }
+    :root {
+      --bg: linear-gradient(135deg, #f0f2f5 0%, #e8ecef 100%);
+      --glass: rgba(255, 255, 255, 0.25);
+      --blur: blur(16px);
+      --border: 1px solid rgba(255, 255, 255, 0.4);
+      --shadow: 0 20px 60px rgba(0,0,0,0.15);
+      --accent: #007aff; /* Apple blue */
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1d1d1f;
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      max-width: 420px;
+      width: 90%;
+      padding: 40px 20px;
+      text-align: center;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity:0; transform: translateY(40px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    .app-card {
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: var(--border);
+      border-radius: 36px;
+      box-shadow: var(--shadow);
+      padding: 40px 28px;
+      transform-style: preserve-3d;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
+    }
+
+    /* Vanilla Tilt adds data-tilt attrs → enables 3D rotation on mouse move */
+    .app-card:hover {
+      box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+      transform: scale(1.03); /* subtle spring pop */
+    }
+
+    .icon {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(145deg, #667eea, #764ba2);
+      border-radius: 32px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      color: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #6e6e73;
+      margin-bottom: 32px;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      color: #3c3c43;
+    }
+
+    .screenshots {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 40px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    .screenshot {
+      width: 100px;
+      height: 200px;
+      background: #d1d1d6;
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8e8e93;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding: 16px 40px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0,122,255,0.3);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-4px) scale(1.06);
+      box-shadow: 0 20px 50px rgba(0,122,255,0.5);
+    }
+
+    .small-text {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #8e8e93;
+    }
   </style>
 </head>
 <body>
-  <h1>My File Downloads</h1>
-  <p>Click the links below to download:</p>
-  <ul>
-    <li><a href="myfile.zip" download>Download myfile.zip (Version 1.0)</a></li>
-    <li><a href="guide.pdf" download>Download User Guide (PDF)</a></li>
-    <li><a href="images/example.png" download>View/Download Sample Image</a></li>
-    <!-- Add more as needed -->
-  </ul>
+
+  <div class="app-container">
+    <div class="app-card" data-tilt data-tilt-max="18" data-tilt-speed="600" data-tilt-perspective="1200" data-tilt-scale="1.05">
+
+      <!-- App Icon (gradient placeholder – replace with real PNG if you upload one) -->
+      <div class="icon"><i class="fas fa-atom"></i></div>
+
+      <h1>Antimatter</h1>
+      <div class="subtitle">Version 1.0 • Utility App</div>
+
+      <p class="description">
+        Experience the power of antimatter simulation in your pocket. Explore particle physics, visualize collisions, and unlock mind-bending visuals. Sideloading made simple — tap below to install the IPA.
+      </p>
+
+      <!-- Placeholder screenshots (upload real ones to repo and link like <img src="screenshot1.png">) -->
+      <div class="screenshots">
+        <div class="screenshot">Screen 1<br>Dashboard</div>
+        <div class="screenshot">Screen 2<br>Simulation</div>
+        <div class="screenshot">Screen 3<br>Visuals</div>
+      </div>
+
+      <a href="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/ipa-files/antimatter.ipa?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpcGEtZmlsZXMvYW50aW1hdHRlci5pcGEiLCJpYXQiOjE3NzIzMjgxMzcsImV4cCI6MjA4NzY4ODEzN30.nGDSugTv8-Eh18Tpny0TTjBD4nueZbo9IHDA1ztnI5o" 
+         class="download-btn" download>
+        <i class="fas fa-cloud-arrow-down"></i> Download Antimatter IPA
+      </a>
+
+      <div class="small-text">Hosted on GitHub Pages • For educational use only</div>
+    </div>
+  </div>
+
+  <script>
+    // Optional: Extra subtle entrance for card
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+      max: 18,
+      speed: 600,
+      perspective: 1200,
+      scale: 1.05,
+      glare: true,
+      "max-glare": 0.4,
+    });
+  </script>
+
 </body>
 </html>
