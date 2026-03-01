@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Antimatter — Download IPA</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <!-- Vanilla Tilt.js for 3D tilt hover (lightweight, GPU-friendly) -->
+  <!-- Vanilla Tilt.js for 3D tilt hover -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
   <style>
     :root {
       --bg: linear-gradient(135deg, #f0f2f5 0%, #e8ecef 100%);
-      --glass: rgba(255, 255, 255, 0.25);
-      --blur: blur(16px);
-      --border: 1px solid rgba(255, 255, 255, 0.4);
-      --shadow: 0 20px 60px rgba(0,0,0,0.15);
-      --accent: #007aff; /* Apple blue */
+      --glass: rgba(255, 255, 255, 0.35);
+      --blur: blur(20px);
+      --border: 1px solid rgba(255, 255, 255, 0.5);
+      --shadow: 0 25px 70px rgba(0,0,0,0.18);
+      --accent: #007aff;
+      --scroll-speed: 35s; /* Adjust for faster/slower auto-scroll */
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -30,15 +31,15 @@
     }
 
     .app-container {
-      max-width: 420px;
-      width: 90%;
-      padding: 40px 20px;
+      max-width: 460px;
+      width: 92%;
+      padding: 50px 20px;
       text-align: center;
-      animation: fadeIn 1.2s ease-out;
+      animation: fadeIn 1.4s ease-out;
     }
 
     @keyframes fadeIn {
-      from { opacity:0; transform: translateY(40px); }
+      from { opacity:0; transform: translateY(50px); }
       to   { opacity:1; transform: translateY(0); }
     }
 
@@ -47,99 +48,130 @@
       backdrop-filter: var(--blur);
       -webkit-backdrop-filter: var(--blur);
       border: var(--border);
-      border-radius: 36px;
+      border-radius: 40px;
       box-shadow: var(--shadow);
-      padding: 40px 28px;
+      padding: 45px 30px;
       transform-style: preserve-3d;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s;
     }
 
-    /* Vanilla Tilt adds data-tilt attrs → enables 3D rotation on mouse move */
     .app-card:hover {
-      box-shadow: 0 40px 100px rgba(0,0,0,0.25);
-      transform: scale(1.03); /* subtle spring pop */
+      box-shadow: 0 50px 120px rgba(0,0,0,0.28);
+      transform: scale(1.035);
     }
 
     .icon {
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(145deg, #667eea, #764ba2);
-      border-radius: 32px;
-      margin: 0 auto 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 60px;
-      color: white;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      width: 140px;
+      height: 140px;
+      background: #ffffff;
+      border-radius: 36px;
+      margin: 0 auto 28px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    }
+
+    .icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     h1 {
-      font-size: 2.6rem;
-      font-weight: 700;
-      margin-bottom: 12px;
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
     }
 
     .subtitle {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: #6e6e73;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
 
     .description {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 40px;
+      font-size: 1.15rem;
+      line-height: 1.65;
+      margin-bottom: 45px;
       color: #3c3c43;
+    }
+
+    /* Auto-scrolling infinite carousel */
+    .screenshots-wrapper {
+      overflow: hidden;
+      margin-bottom: 50px;
+      padding: 15px 0;
+      position: relative;
     }
 
     .screenshots {
       display: flex;
-      gap: 16px;
-      justify-content: center;
-      margin-bottom: 40px;
-      overflow-x: auto;
-      padding: 10px 0;
+      gap: 20px;
+      animation: scroll var(--scroll-speed) linear infinite;
+      width: max-content; /* Allows it to be wider than viewport */
+      will-change: transform; /* GPU acceleration */
+    }
+
+    .screenshots:hover {
+      animation-play-state: paused; /* Pause on hover */
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .screenshot {
-      width: 100px;
-      height: 200px;
-      background: #d1d1d6;
-      border-radius: 24px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      width: 110px;
+      height: 220px;
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       flex-shrink: 0;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Duplicate set for seamless loop */
+    .screenshots-duplicate {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #8e8e93;
-      font-size: 0.9rem;
-      text-align: center;
+      gap: 20px;
+      flex-shrink: 0;
     }
 
     .download-btn {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       background: var(--accent);
       color: white;
-      font-size: 1.3rem;
-      font-weight: 600;
-      padding: 16px 40px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      padding: 18px 50px;
       border-radius: 999px;
       text-decoration: none;
-      box-shadow: 0 10px 30px rgba(0,122,255,0.3);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 12px 35px rgba(0,122,255,0.35);
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .download-btn:hover {
-      transform: translateY(-4px) scale(1.06);
-      box-shadow: 0 20px 50px rgba(0,122,255,0.5);
+      transform: translateY(-6px) scale(1.07);
+      box-shadow: 0 25px 60px rgba(0,122,255,0.55);
     }
 
     .small-text {
-      margin-top: 40px;
-      font-size: 0.9rem;
+      margin-top: 50px;
+      font-size: 0.95rem;
       color: #8e8e93;
     }
   </style>
@@ -147,41 +179,71 @@
 <body>
 
   <div class="app-container">
-    <div class="app-card" data-tilt data-tilt-max="18" data-tilt-speed="600" data-tilt-perspective="1200" data-tilt-scale="1.05">
+    <div class="app-card" data-tilt data-tilt-max="20" data-tilt-speed="700" data-tilt-perspective="1400" data-tilt-scale="1.06">
 
-      <!-- App Icon (gradient placeholder – replace with real PNG if you upload one) -->
-      <div class="icon"><i class="fas fa-atom"></i></div>
+      <div class="icon">
+        <img src="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/app-assets/antimatter.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAtYXNzZXRzL2FudGltYXR0ZXIucG5nIiwiaWF0IjoxNzcyMzI5MTAyLCJleHAiOjIwODc2ODkxMDJ9.zCRu_sxfQyZuqPNbE49-RvnzLE6aYBeSs2aq3jUw2PQ" alt="Antimatter App Icon">
+      </div>
 
       <h1>Antimatter</h1>
-      <div class="subtitle">Version 1.0 • Utility App</div>
+      <div class="subtitle">IPA Sideloading • Utility & Tools • v1.0</div>
 
       <p class="description">
-        Experience the power of antimatter simulation in your pocket. Explore particle physics, visualize collisions, and unlock mind-bending visuals. Sideloading made simple — tap below to install the IPA.
+        Discover a powerful sideloading experience with Antimatter. Developers: Upload your ipa files to the community. Browse, install, and manage tweaked & custom IPAs effortlessly — all in one place.
       </p>
 
-      <!-- Placeholder screenshots (upload real ones to repo and link like <img src="screenshot1.png">) -->
-      <div class="screenshots">
-        <div class="screenshot">Screen 1<br>Dashboard</div>
-        <div class="screenshot">Screen 2<br>Simulation</div>
-        <div class="screenshot">Screen 3<br>Visuals</div>
+      <!-- Auto-scrolling screenshots (duplicated for infinite loop) -->
+      <div class="screenshots-wrapper">
+        <div class="screenshots">
+          <!-- First set -->
+          <div class="screenshot">
+            <img src="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/app-assets/photo-output.PNG?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAtYXNzZXRzL3Bob3RvLW91dHB1dC5QTkciLCJpYXQiOjE3NzIzMjk2NDIsImV4cCI6MjA4NzY4OTY0Mn0.MTY03uUZHT0ReaitIF1Eje-VI7AQ9QIwwQPJ8l2IfJM" alt="Screenshot 1">
+          </div>
+          <div class="screenshot">
+            <img src="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/app-assets/photo-output_1.PNG?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAtYXNzZXRzL3Bob3RvLW91dHB1dF8xLlBORyIsImlhdCI6MTc3MjMyOTY4MCwiZXhwIjoyMDg3Njg5NjgwfQ.Orr2lvvcdUCYlXlQh74NsHrGGYQix-I3WoNM8djwZCI" alt="Screenshot 2">
+          </div>
+          <div class="screenshot">
+            <img src="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/app-assets/unnamed%20(2).png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAtYXNzZXRzL3VubmFtZWQgKDIpLnBuZyIsImlhdCI6MTc3MjMyOTgwMCwiZXhwIjoyMDg3Njg5ODAwfQ.VUEc2poDfcsiptTq5sVBrjpJDUAnqVS5BDcoTzeM5o0" alt="Screenshot 3">
+          </div>
+          <div class="screenshot">
+            <img src="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/app-assets/unnamed.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAtYXNzZXRzL3VubmFtZWQucG5nIiwiaWF0IjoxNzcyMzI5Njk4LCJleHAiOjIwODc2ODk2OTh9.9AfBQSijz6ByC-MLknwxAkDDiWcP8MAXYxYW_R1i9e4" alt="Screenshot 4">
+          </div>
+
+          <!-- Duplicate set for seamless infinite loop -->
+          <div class="screenshots-duplicate">
+            <div class="screenshot">
+              <img src="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/app-assets/photo-output.PNG?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAtYXNzZXRzL3Bob3RvLW91dHB1dC5QTkciLCJpYXQiOjE3NzIzMjk2NDIsImV4cCI6MjA4NzY4OTY0Mn0.MTY03uUZHT0ReaitIF1Eje-VI7AQ9QIwwQPJ8l2IfJM" alt="Screenshot 1">
+            </div>
+            <div class="screenshot">
+              <img src="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/app-assets/photo-output_1.PNG?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAtYXNzZXRzL3Bob3RvLW91dHB1dF8xLlBORyIsImlhdCI6MTc3MjMyOTY4MCwiZXhwIjoyMDg3Njg5NjgwfQ.Orr2lvvcdUCYlXlQh74NsHrGGYQix-I3WoNM8djwZCI" alt="Screenshot 2">
+            </div>
+            <div class="screenshot">
+              <img src="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/app-assets/unnamed%20(2).png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAtYXNzZXRzL3VubmFtZWQgKDIpLnBuZyIsImlhdCI6MTc3MjMyOTgwMCwiZXhwIjoyMDg3Njg5ODAwfQ.VUEc2poDfcsiptTq5sVBrjpJDUAnqVS5BDcoTzeM5o0" alt="Screenshot 3">
+            </div>
+            <div class="screenshot">
+              <img src="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/app-assets/unnamed.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAtYXNzZXRzL3VubmFtZWQucG5nIiwiaWF0IjoxNzcyMzI5Njk4LCJleHAiOjIwODc2ODk2OTh9.9AfBQSijz6ByC-MLknwxAkDDiWcP8MAXYxYW_R1i9e4" alt="Screenshot 4">
+            </div>
+          </div>
+        </div>
       </div>
 
       <a href="https://ehkujnkiftntxyeqnxcz.supabase.co/storage/v1/object/sign/ipa-files/antimatter.ipa?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hOTYxMzVjMi02ZGQyLTQ1ZDYtYjM2YS1mOTdhZjQzYmRkZTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpcGEtZmlsZXMvYW50aW1hdHRlci5pcGEiLCJpYXQiOjE3NzIzMjgxMzcsImV4cCI6MjA4NzY4ODEzN30.nGDSugTv8-Eh18Tpny0TTjBD4nueZbo9IHDA1ztnI5o" 
          class="download-btn" download>
         <i class="fas fa-cloud-arrow-down"></i> Download Antimatter IPA
       </a>
+
+      <div class="small-text">Hosted on GitHub Pages • Sideloading for educational & personal use</div>
     </div>
   </div>
 
   <script>
-    // Optional: Extra subtle entrance for card
     VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-      max: 18,
-      speed: 600,
-      perspective: 1200,
-      scale: 1.05,
+      max: 20,
+      speed: 700,
+      perspective: 1400,
+      scale: 1.06,
       glare: true,
-      "max-glare": 0.4,
+      "max-glare": 0.35,
     });
   </script>
 
